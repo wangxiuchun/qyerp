@@ -14,7 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2019-12-18 20:42:04
  */
-@Service("erpSysUserService")
+@Service
 public class ErpSysUserServiceImpl implements ErpSysUserService {
     @Resource
     private ErpSysUserDao erpSysUserDao;

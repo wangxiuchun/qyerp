@@ -1,209 +1,86 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<!--<base href="http://localhost:8080/qyerp/">-->
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title>Mr.Rainbow·登陆</title>
-		<link rel="stylesheet" href="layui/css/layui.css" media="all"/>
-		<link rel="stylesheet" href="css/login.css" media="all"/>
-		<style>
-			/* 覆盖原框架样式 */
-			.layui-elem-quote{background-color: inherit!important;}
-			.layui-input, .layui-select, .layui-textarea{background-color: inherit; padding-left: 30px;}
-		</style>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HTML5响应式用户登录界面模板</title>
+    <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+    <meta name="author" content="Vincent Garreau" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" media="screen" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/reset.css"/>
+</head>
+<body>
 
-	</head>
-	<body>
-		<!-- Head -->
-		<div class="layui-fluid">
-			<div class="layui-row layui-col-space15">
-				<div class="layui-col-sm12 layui-col-md12 zyl_mar_01">
-					<blockquote class="layui-elem-quote">Mr.Rainbow·简约后台登陆界面</blockquote>
-				</div>
-			</div>
-		</div>
-		<!-- Head End -->
-		
-		<!-- Carousel -->
-		<div class="layui-row">
-			<div class="layui-col-sm12 layui-col-md12">
-				<div class="layui-carousel zyl_login_height" id="zyllogin" lay-filter="zyllogin">
-					<div carousel-item="">
-						<div>
-							<div class="zyl_login_cont"></div>
-						</div>
-						<div>
-							<img src="img/carousel/01.jpg" />
-						</div>
-						<div>
-							<div class="background">
-								<span></span><span></span><span></span>
-								<span></span><span></span><span></span>
-								<span></span><span></span><span></span>
-								<span></span><span></span><span></span>
-							</div>
-						</div>
-						<div>
-							<img src="img/carousel/03.jpg" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Carousel End -->
-		
-		<!-- Footer -->
-		<div class="layui-row">
-			<div class="layui-col-sm12 layui-col-md12 zyl_center zyl_mar_01">
-				© 2019 - 简约后台登陆界面 || 简约后台登陆界面版权所有
-			</div>
-		</div>
-		<!-- Footer End -->
-		
-		
-		
-		<!-- LoginForm -->
-		<div class="zyl_lofo_main">
-			<fieldset class="layui-elem-field layui-field-title zyl_mar_02">
-				<legend>欢迎登陆 - 彩虹先生管理平台</legend>
-			</fieldset>
-			<div class="layui-row layui-col-space15">
-				<form class="layui-form zyl_pad_01">
-					<div class="layui-col-sm12 layui-col-md12">
-						<div class="layui-form-item">
-							<input type="text" name="tel" lay-verify="required|userName" autocomplete="off" placeholder="账号" class="layui-input">
-							<i class="layui-icon layui-icon-username zyl_lofo_icon"></i>
-						</div>
-					</div>
-					<div class="layui-col-sm12 layui-col-md12">
-						<div class="layui-form-item">
-							<input type="password" name="password" lay-verify="required|pass" autocomplete="off" placeholder="密码" class="layui-input">
-							<i class="layui-icon layui-icon-password zyl_lofo_icon"></i>
-						</div>
-					</div>
-					<div class="layui-col-sm12 layui-col-md12">
-						<div class="layui-row">
-							<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-								<div class="layui-form-item">
-									<input type="text" name="vercode" id="vercode" lay-verify="required|vercodes" autocomplete="off" placeholder="验证码" class="layui-input" maxlength="4">
-									<i class="layui-icon layui-icon-vercode zyl_lofo_icon"></i>
-								</div>
-							</div>
-							<div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
-								<div class="zyl_lofo_vercode zylVerCode" onclick="zylVerCode()"></div>
-							</div>
-						</div>
-					</div>
-					<div class="layui-col-sm12 layui-col-md12">
-						<button class="layui-btn layui-btn-fluid" lay-submit="" lay-filter="demo1">立即登录</button>
-					</div>
-				</form>
-			</div>
-		</div>
-		<!-- LoginForm End -->
-		
-		
-		<!-- Jquery Js -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<!-- Layui Js -->
-		<script type="text/javascript" src="layui/layui.js"></script>
-		<!-- Jqarticle Js -->
-		<script type="text/javascript" src="assembly/jqarticle/jparticle.min.js"></script>
-		<!-- ZylVerificationCode Js-->
-		<script type="text/javascript" src="assembly/zylVerificationCode/zylVerificationCode.js"></script>
-		<script>
-			layui.use(['carousel', 'form'], function(){
-				var carousel = layui.carousel
-				,form = layui.form;
-				
-				//自定义验证规则
-				form.verify({
-					// userName: function(value){
-					// 	if(value.length < 5){
-					// 		return '账号至少得5个字符';
-					// 	}
-					// }
-					// ,
-					pass: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
-					,vercodes: function(value){
-						//获取验证码
-						var zylVerCode = $(".zylVerCode").html();
-						if(value!=zylVerCode){
-							return '验证码错误（区分大小写）';
-						}
-					}
-					,content: function(value){
-						layedit.sync(editIndex);
-					}
-				});
-				
-				//监听提交
-				form.on('submit(demo1)', function(data){
-					// layer.alert(JSON.stringify(data.field),{
-					// 	title: '最终的提交信息'
-					// })
-					$.ajax({
-						url:"user/login",
-						type:"post",
-						data:{tel:data.field.tel,password:data.field.password },
-						dataType:"text",
-						success:function (data) {
-						    if(data=="true"){
-                                console.log("跳转");
-								window.location.href = 'user/toBackIndex';
-                              return true;
-							}else{
-                                console.log("ddddd");
-                                return false;
-							}
+<div id="particles-js">
+    <div class="login">
+        <div class="login-top">
+            登录
+        </div>
+        <div class="login-center clearfix">
+            <div class="login-center-img"><img src="static/img/name.png"/></div>
+            <div class="login-center-input">
+                <input type="text" name="" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+                <div class="login-center-input-text">用户名</div>
+            </div>
+        </div>
+        <div class="login-center clearfix">
+            <div class="login-center-img"><img src="static/img/password.png"/></div>
+            <div class="login-center-input">
+                <input type="password" name=""value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+                <div class="login-center-input-text">密码</div>
+            </div>
+        </div>
+        <div class="login-button">
+            登录
+        </div>
+    </div>
+    <div class="sk-rotating-plane"></div>
+</div>
 
-                        }
-					})
-					return false;
-				});
+<!-- scripts -->
+<script src="static/js/particles.min.js"></script>
+<script src="static/js/app.js"></script>
+<script type="text/javascript">
+    function hasClass(elem, cls) {
+        cls = cls || '';
+        if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+        return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+    }
 
+    function addClass(ele, cls) {
+        if (!hasClass(ele, cls)) {
+            ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+        }
+    }
 
-				
-				//设置轮播主体高度
-				var zyl_login_height = $(window).height()/1.3;
-				var zyl_car_height = $(".zyl_login_height").css("cssText","height:" + zyl_login_height + "px!important");
-				
-				
-				//Login轮播主体
-			 	carousel.render({
-					elem: '#zyllogin'//指向容器选择器
-					,width: '100%' //设置容器宽度
-					,height:'zyl_car_height'
-					,arrow: 'always' //始终显示箭头
-					,anim: 'fade' //切换动画方式
-					,autoplay: true //是否自动切换false true
-					,arrow: 'hover' //切换箭头默认显示状态||不显示：none||悬停显示：hover||始终显示：always
-					,indicator: 'none' //指示器位置||外部：outside||内部：inside||不显示：none
-					,interval: '5000' //自动切换时间:单位：ms（毫秒）
-				});
-				
-				//监听轮播--案例暂未使用
-				carousel.on('change(zyllogin)', function(obj){
-					var loginCarousel = obj.index;
-				});
-				
-				//粒子线条
-				$(".zyl_login_cont").jParticle({
-					background: "rgba(0,0,0,0)",//背景颜色
-					color: "#fff",//粒子和连线的颜色
-					particlesNumber:100,//粒子数量
-					//disableLinks:true,//禁止粒子间连线
-					//disableMouse:true,//禁止粒子间连线(鼠标)
-					particle: {
-					    minSize: 1,//最小粒子
-					    maxSize: 3,//最大粒子
-					    speed: 30,//粒子的动画速度
-					 }
-				});
-				
-			});
-			
-		</script>
-	</body>
+    function removeClass(ele, cls) {
+        if (hasClass(ele, cls)) {
+            var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+            while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+                newClass = newClass.replace(' ' + cls + ' ', ' ');
+            }
+            ele.className = newClass.replace(/^\s+|\s+$/g, '');
+        }
+    }
+    document.querySelector(".login-button").onclick = function(){
+        addClass(document.querySelector(".login"), "active")
+        setTimeout(function(){
+            addClass(document.querySelector(".sk-rotating-plane"), "active")
+            document.querySelector(".login").style.display = "none"
+        },800)
+        setTimeout(function(){
+            removeClass(document.querySelector(".login"), "active")
+            removeClass(document.querySelector(".sk-rotating-plane"), "active")
+            document.querySelector(".login").style.display = "block"
+            alert("登录成功")
+
+        },5000)
+    }
+</script>
+<div style="text-align:center;">
+    <p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+
+<script type="text/javascript"> (function() { var s = "_" + Math.random().toString(36).slice(2); document.write('<div style="" id="' + s + '"></div>'); (window.slotbydup = window.slotbydup || []).push({ id: "u4923786", container:  s }); })(); </script><script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script>
+</body>
 </html>

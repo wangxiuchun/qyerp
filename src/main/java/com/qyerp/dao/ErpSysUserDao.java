@@ -1,7 +1,11 @@
 package com.qyerp.dao;
 
 import com.qyerp.entity.ErpSysUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -10,6 +14,8 @@ import java.util.List;
  * @author makejava
  * @since 2019-12-18 20:42:03
  */
+@Repository
+@Mapper
 public interface ErpSysUserDao {
 
     /**
@@ -18,6 +24,7 @@ public interface ErpSysUserDao {
      * @param id 主键
      * @return 实例对象
      */
+    @Select("select * from base_user")
     ErpSysUser queryById(Integer id);
 
     /**
