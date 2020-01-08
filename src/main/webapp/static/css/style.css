@@ -49,7 +49,7 @@ canvas{
 	width: 100%;
 	height: 100%;
 	position: relative;
-	background-image: url(../img/bg.jpg);
+	background-image: url(../img/bg2.jpg);
 	background-position: 50% 50%;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -98,8 +98,8 @@ canvas{
 	}
 }
 
-.login{z-index: 2;position:absolute;width: 350px;border-radius: 5px;height: 500px;background: white;box-shadow: 0px 0px 5px #333333;top: 50%;left: 50%;margin-top: -250px;margin-left: -175px;transition: all 1s;-moz-transition: all 1s;	/* Firefox 4 */-webkit-transition: all 1s;	/* Safari å’Œ Chrome */-o-transition: all 1s;	/* Opera */}
-.login-top{font-size: 24px;margin-top: 100px;padding-left: 40px;box-sizing: border-box;color: #333333;margin-bottom: 50px;}
+.login{z-index: 2;position:absolute;width: 350px;border-radius: 5px;height: 500px;background: white;box-shadow: 0px 0px 5px #333333;top: 50%;left: 50%;margin-top: -250px;margin-left: 230px;transition: all 1s;-moz-transition: all 1s;	/* Firefox 4 */-webkit-transition: all 1s;	/* Safari å’Œ Chrome */-o-transition: all 1s;	/* Opera */}
+.login-top{text-align:center;font-size: 24px;margin-top: 100px;padding-left: 40px;box-sizing: border-box;color: #333333;margin-bottom: 50px;}
 .login-center{width: 100%;box-sizing: border-box;padding: 0 40px;margin-bottom: 30px;}
 .login-center-img{width: 20px;height: 20px;float: left;margin-top: 5px;}
 .login-center-img>img{width: 100%;}
@@ -111,3 +111,4 @@ canvas{
 .login.active{-webkit-animation: login-small 0.8s ; animation: login-small 0.8s ;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards}
 .login-button{cursor: pointer;width: 250px;text-align: center;height: 40px;line-height: 40px;background-color: dodgerblue;border-radius: 5px;margin: 0 auto;margin-top: 50px;color: white;}
 
+.title{font-size: 40px;padding-left: 180px;padding-top: 30px;color: white;font-family: Consolas}
