@@ -15,23 +15,23 @@
     <!--<h1 class="title">企业运作的领跑者</h1>-->
     <div class="login">
         <div class="login-top">
-            登录11
+            登录
         </div>
         <div class="login-center clearfix">
             <div class="login-center-img"><img src="/static/img/name.png"/></div>
             <div class="login-center-input">
-                <input type="text" name="" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+                <input type="text" name="userCode" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
                 <div class="login-center-input-text">用户名</div>
             </div>
         </div>
         <div class="login-center clearfix">
             <div class="login-center-img"><img src="/static/img/password.png"/></div>
             <div class="login-center-input">
-                <input type="password" name=""value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+                <input type="password" name="password"value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
                 <div class="login-center-input-text">密码</div>
             </div>
         </div>
-        <div class="login-button">
+        <div class="login-button" id="login-button" >
             登录
         </div>
     </div>
@@ -63,7 +63,7 @@
             ele.className = newClass.replace(/^\s+|\s+$/g, '');
         }
     }
-    document.querySelector(".login-button").onclick = function(){
+    /*document.querySelector(".login-button").onclick = function(){
         addClass(document.querySelector(".login"), "active")
         setTimeout(function(){
             addClass(document.querySelector(".sk-rotating-plane"), "active")
@@ -76,9 +76,95 @@
             alert("登录成功")
 
         },5000)
-    }
+    }*/
 </script>
 
 <script type="text/javascript"> (function() { var s = "_" + Math.random().toString(36).slice(2); document.write('<div style="" id="' + s + '"></div>'); (window.slotbydup = window.slotbydup || []).push({ id: "u4923786", container:  s }); })(); </script><script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script>
+
+<script>
+    var btn = document.getElementById("login-button");
+    btn.onclick = function(){
+
+        //自定义验证规则
+        form.verify({
+            password: [/^[\S]{6,12}$/,'密码必须6到12位，且不能出现空格']
+            ,vercodes: function(value){
+                //获取验证码
+                var zylVerCode = $(".zylVerCode").html();
+                if(value!=zylVerCode){
+                    return '验证码错误（区分大小写）';
+                }
+            }
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            /*layer.alert(JSON.stringify(data.field),{
+                title: '最终的提交信息'
+            })*/
+
+
+            $.ajax({
+                url:"emp/login",
+                type:"post",
+                data:{"tel":data.field.tel,"password":data.field.password},
+                dataType:"text",
+                success:function(data){
+                    if(data=="true"){
+                        window.location.href="per/toBackIndex";
+                        console.log("跳转");
+                    }else {
+                        alert("错误");
+                    }
+                }
+
+            })
+            return false;
+        });
+
+
+        //设置轮播主体高度
+        var zyl_login_height = $(window).height()/1.3;
+        var zyl_car_height = $(".zyl_login_height").css("cssText","height:" + zyl_login_height + "px!important");
+
+
+        //Login轮播主体
+        carousel.render({
+            elem: '#zyllogin'//指向容器选择器
+            ,width: '100%' //设置容器宽度
+            ,height:'zyl_car_height'
+            ,arrow: 'always' //始终显示箭头
+            ,anim: 'fade' //切换动画方式
+            ,autoplay: true //是否自动切换false true
+            ,arrow: 'hover' //切换箭头默认显示状态||不显示：none||悬停显示：hover||始终显示：always
+            ,indicator: 'none' //指示器位置||外部：outside||内部：inside||不显示：none
+            ,interval: '5000' //自动切换时间:单位：ms（毫秒）
+        });
+
+        //监听轮播--案例暂未使用
+        carousel.on('change(zyllogin)', function(obj){
+            var loginCarousel = obj.index;
+        });
+
+        //粒子线条
+        $(".zyl_login_cont").jParticle({
+            background: "rgba(0,0,0,0)",//背景颜色
+            color: "#fff",//粒子和连线的颜色
+            particlesNumber:100,//粒子数量
+            //disableLinks:true,//禁止粒子间连线
+            //disableMouse:true,//禁止粒子间连线(鼠标)
+            particle: {
+                minSize: 1,//最小粒子
+                maxSize: 3,//最大粒子
+                speed: 30,//粒子的动画速度
+            }
+        });
+
+    });
+
+</script>
 </body>
 </html>
